@@ -1,7 +1,6 @@
 *.docx
 *.xlxs
 *.jpg
-/figures/
 *.Rhistory
 /.Rproj.user/
 !database_structure.jpg
