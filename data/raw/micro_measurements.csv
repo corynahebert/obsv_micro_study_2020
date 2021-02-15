@@ -1,4 +1,4 @@
-﻿site,direction,meter_start,meter_end,profilometer_width_cm,pin_profile_length_cm,max_pin_height_cm,min_pin_height_cm,notes
+﻿site_id,direction,meter_start,meter_end,profilometer_width_cm,pin_profile_length_cm,max_pin_height_cm,min_pin_height_cm,notes
 BR-01,T1,9,10,93.327,100.263,19.582,15.782,No ruler
 BR-01,T1,14,15,93.874,104.551,19.575,14.571,
 BR-01,T1,19,20,91.753,100.17,16.455,13.382,
@@ -179,8 +179,3 @@ NPDC-02,T3,14,15,91.039,105.511,25.311,20.348,
 NPDC-02,T3,19,20,89.959,101.985,22.161,16.521,
 NPDC-02,T3,24,25,93.12,111.333,25.688,19.304,
 NPDC-02,T3,29,30,93.555,110.2,26.291,20.887,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,

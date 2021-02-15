@@ -4,3 +4,4 @@
 /figures/
 *.Rhistory
 /.Rproj.user/
+!database_structure.jpg
