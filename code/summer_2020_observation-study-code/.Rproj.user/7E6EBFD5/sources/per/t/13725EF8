@@ -1,25 +1,25 @@
 {
     "id": "13725EF8",
-    "path": null,
-    "project_path": null,
+    "path": "~/Wetlan_USU/2020_observational_study/code/summer_2020_observation-study-code/micro_analysis.R",
+    "project_path": "micro_analysis.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "603889138",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1612984889595.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "7,0",
+        "cursorPosition": "2,77",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 3184366217896027506,
-    "encoding": "",
+    "lastKnownWriteTime": 1613762300,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1612997544766,
+    "last_content_update": 1613762300871,
     "read_only": false,
     "read_only_alternatives": []
 }

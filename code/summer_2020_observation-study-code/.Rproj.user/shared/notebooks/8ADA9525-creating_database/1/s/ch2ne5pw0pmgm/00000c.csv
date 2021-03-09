@@ -1,0 +1,16 @@
+"0","dbExecute(observational_db, ""CREATE TABLE plants (
+date varchar(5) NOT NULL,
+site_id varchar(10) NOT NULL,
+line char(1),
+direction varchar(50),
+point varchar(2), 
+top_code varchar(6), 
+code_1 varchar(6), 
+code_2 varchar(6), 
+code_3 varchar(6), 
+soil_surface varchar(5), 
+PRIMARY KEY (site_id)
+);"")
+"
+"2","Error: table plants already exists
+"

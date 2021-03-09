@@ -1,7 +1,0 @@
-## Line Point Data for observational study 
-
-setwd("C:/Users/Coryna/Documents/Wetlan_USU/2020_observational_study/data/raw")
-
-line_point <- read.csv("line_point_data.csv")
-
-str(line_point)

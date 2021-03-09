@@ -1,0 +1,6 @@
+"0","plants <- read.csv(""line_point_data.csv"", 
+                   stringsAsFactors = FALSE) 
+"
+"2","cannot open file 'line_point_data.csv': No such file or directory"
+"2","Error in file(file, ""rt"") : cannot open the connection
+"

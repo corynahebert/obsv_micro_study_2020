@@ -1,0 +1,5 @@
+"0","observational_db <- dbConnect(RSQLite::SQLite(), ""../../2020_observational_study/data/raw/observational.db"")
+"
+"2","Error: Could not connect to database:
+unable to open database file
+"
