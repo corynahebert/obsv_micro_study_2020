@@ -1,0 +1,153 @@
+---
+title: "Microtopography of Great Salt Lake Wetlands"
+author: "Coryna Hebert"
+date: "4/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("htmltools", version = "0.5.1")
+library(htmltools)
+install.packages("rmarkdown", dependencies = TRUE)
+library(RSQLite)
+
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading packages
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r load packages, eval=FALSE}
+library(DBI)
+library(RSQLite)
+library(tidyverse)
+```
+
+## Establishing a database conenction
+
+
+```{r database, echo=FALSE}
+observational_db <- dbConnect(RSQLite::SQLite(),
+                              "C:/Users/Coryna/Documents/Wetlan_USU/2020_observational_study/data/observational.db")
+```
+
+
+## Creating tables 
+
+I will use the `dbexecute` function to create my tables. 
+
+```{r, eval=FALSE, echo=TRUE}
+dbExecute(observational_db, "CREATE TABLE linepoint (
+date varchar(5) NOT NULL,
+site_id varchar(10) NOT NULL,
+line char(1),
+direction varchar(50),
+point varchar(2), 
+top_layer varchar(6), 
+code_1 varchar(6), 
+code_2 varchar(6), 
+code_3 varchar(6), 
+soil_surface varchar(5), 
+PRIMARY KEY (site_id)
+);")
+
+dbExecute(observational_db, "CREATE TABLE microtopo (
+date varchar(5) NOT NULL,
+site_id varchar(10) NOT NULL,
+direction varchar(5),
+meter_start varchar(3), 
+meter_end varchar(3), 
+profilometer_wdith_cm varchar(10), 
+pin_profile_length_cm varchar(10), 
+max_pin_height_cm varchar(10), 
+min_pin_height_cm varchar(10), 
+notes varchar(50),
+PRIMARY KEY (site_id)
+);")
+
+
+```
+
+## Importing data into the tables 
+
+For whatever reason, I kept getting an error when I ran the `read.csv()` function, 
+so I had to use the `file.choose` function first 
+
+```{r, eval=FALSE}
+
+table1 <- file.choose("line_point_data.csv")
+linepoint <- read.csv(table1,
+                   fileEncoding="UTF-8-BOM",
+                   stringsAsFactors = FALSE) 
+
+table2 <- file.choose("micro_measurements.csv")
+micro <- read.csv(table2, 
+                  stringsAsFactors = FALSE)
+names(linepoint)
+
+dbWriteTable(observational_db, "linepoint", linepoint, append = TRUE)
+
+dbWriteTable(observational_db, "micro", micro, append = TRUE)
+
+
+
+```
+
+## My database structure 
+
+```{r image, fig.cap="Database structure", fig.align='center', out.width='100%'}
+knitr::include_graphics("~/Wetlan_USU/2020_observational_study/figures/database_structure.jpg")
+```
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Transforming Cover Data 
+
+```{r}
+tl <- line_point %>% select(c(2,6)) %>% rename(species = top_layer)
+c1 <- line_point %>% select(c(2,7)) %>% rename(species = code_1)
+c2 <- line_point %>% select(c(2,8)) %>% rename(species = code_2)
+c3 <- line_point %>% select(c(2,9)) %>% rename(species = code_3)
+
+new_df <- rbind(tl,c1,c2,c3)
+
+percent_cover <- new_df %>% 
+  group_by(site_id) %>% 
+  count(species) %>% 
+  filter(!is.na(species)) %>% 
+  mutate(n_hits = n,
+         percent_cover = n/150) %>% 
+  select(site_id,
+         species,
+         percent_cover) %>%
+  pivot_wider(names_from = species,
+              values_from = percent_cover) %>% 
+  replace(is.na(.), 0) %>% 
+  filter(site_id != "FABA-01") %>% 
+  filter(site_id != "PSG-01") %>% 
+  filter(site_id != "NPDC-01")
+
+```
+
+
+## Graphing Raw Microtopogprahy Data 
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+## NMDS Plot 
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

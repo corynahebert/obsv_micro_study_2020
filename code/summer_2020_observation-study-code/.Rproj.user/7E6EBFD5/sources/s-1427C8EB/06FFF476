@@ -1,0 +1,32 @@
+{
+    "id": "06FFF476",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1617909613380.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "expression": "species.scores_common",
+        "caption": "species.scores_common",
+        "totalObservations": 12,
+        "displayedObservations": 12,
+        "variables": 4,
+        "cacheKey": "2575E154",
+        "object": "species.scores_common",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=species.scores_common&cache_key=2575E154&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1742253299832,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1617909613380,
+    "read_only": false,
+    "read_only_alternatives": []
+}

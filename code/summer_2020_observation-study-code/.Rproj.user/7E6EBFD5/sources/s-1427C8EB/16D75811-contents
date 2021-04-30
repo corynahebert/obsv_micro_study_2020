@@ -1,0 +1,141 @@
+setwd("~/Wetlan_USU/Wetlan_USU/DataAnalysis")
+
+## load tidyverse, re-load every session 
+
+library(tidyverse)
+
+
+##reconstructing Rae's code for gh graphs
+
+## import csv and change columns to factors or numeric
+
+ghdata <-  read.csv("ghdata2.csv")
+
+str(ghdata)
+
+ghdata[,1] <- as.factor(ghdata[,1])
+ghdata[,2] <- as.factor(ghdata[,2])
+ghdata[,3] <- as.factor(ghdata[,3])
+ghdata[,4] <- as.factor(ghdata[,4])
+ghdata[,5] <- as.numeric(ghdata[,5])
+
+## check data structure 
+
+str(ghdata)
+
+
+install.packages("RColorBrewer")
+library("RColorBrewer")
+
+greenhouse_stats <- ghdata %>%
+  group_by(species, water.treatment,?..exp_day) %>%
+  dplyr::summarise(Mean_cov = mean(cover, na.rm = TRUE),
+                   SD_cov = sd(cover, na.rm = TRUE),
+                   nsize_cov = sum(!is.na(cover)),
+                   SE_cov = SD_cov/sqrt(nsize_cov))
+view(greenhouse_stats)
+
+## facet by water potential 
+
+percent_cover <- ggplot((data=greenhouse_stats), aes(x=?..exp_day, y=Mean_cov, 
+                                      color= species, group=interaction(species, greenhouse_stats$water.treatment))) + 
+  geom_point(size =2.5) + geom_line(aes(linetype = water.treatment), size= 1)+
+  scale_linetype_manual(values=c("dotted", "dashed", "solid")) +
+  theme(legend.title = element_text( size=10), legend.text=element_text(size=10))+
+  scale_color_manual("Species", values = c("orange", "palevioletred", "mediumblue", 
+                                           "purple1", "gold1","coral", "forestgreen", "red", "skyblue2",
+                                           "slategrey", "sienna"), 
+                     breaks=c("RUMA", "POLA","BICE", "EPCI",
+                              "PUNU", "DISP", "SCAC", "ELPA", "BOMA", "MIX", "PMIX"), 
+                     labels=c("Golden dock", "Pale smartweed", "Nodding beggartick",
+                              "Fringed willowherb", "Nuttall's alkaligrass", "Saltgrass",
+                              "Hardstem bulrush", "Common spikerush", "Alkali bulrush",
+                              "9 Spp. Mix", "4 Spp. Perrenial Mix"))+
+  ggtitle("Greenhouse Percent Cover") +
+  facet_wrap(~ water.treatment) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab ("Experiment day")+
+  ylab("Percent cover estimate")+
+  scale_linetype_discrete(name = "Water Treatment", labels = c("Flooded", 
+                                                  "Saturated", "Drought"))
+
+png("percent_cover.png")
+print(percent_cover)
+
+ggsave("percent_cover.png",
+       path = "C:/Users/Coryna/Documents/Wetlan_USU/
+       Experiments/2020_spring_gh-experiment/Figures")
+
+
+## Facet by species ------------
+
+
+species_cov <- ggplot(na.omit(greenhouse_stats), aes(x=?..exp_day, y=Mean_cov,color = species,
+                                      shape = water.treatment, group=interaction(species, water.treatment))) + 
+  geom_point(size =2.5) + geom_line(aes(linetype = water.treatment), size = 1)+
+  scale_linetype_manual(values=c("dotted", "dashed", "solid")) +
+  scale_color_manual(values=brewer.pal(n = 11, name = "Paired"))+
+  theme(legend.title = element_text( size=10), legend.text=element_text(size=10))+
+  guides (color = FALSE)+
+  ggtitle("Greenhouse Percent Cover") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  facet_wrap(~ species) +
+  xlab("Day of Experiment")+
+  ylab("Percent Cover Estimates")+
+  scale_linetype_discrete(name = "Water Treatment", labels = c("Flooded", "Saturated", "Drought"))+
+  scale_shape_discrete(name = "Water Treatment", labels = c("Flooded", "Saturated", "Drought"))
+  
+
+
+## graphs for mix treatments 
+
+mix_data <- read.csv("gh_cover_mix.csv")
+
+str(mix_data)
+
+mix_data[,1] <- as.factor(mix_data[,1])
+mix_data[,2] <- as.factor(mix_data[,2])
+mix_data[,3] <- as.factor(mix_data[,3])
+mix_data[,4] <- as.factor(mix_data[,4])
+
+
+mix_stats <- mix_data %>%
+  group_by(water_treatment,?..exp_day, species) %>%
+  dplyr::summarise(Mean_cov = mean(cover),
+                   SD_cov = sd(cover, na.rm = TRUE),
+                   nsize_cov = sum(!is.na(cover)),
+                   SE_cov = SD_cov/sqrt(nsize_cov))
+view(mix_stats)
+
+view(mix_data)
+
+mix_cover <- ggplot((data=mix_stats), aes(x=?..exp_day, y=Mean_cov, 
+                                                     color= species, group=interaction(species, mix_stats$water_treatment))) + 
+  geom_point(size =2.5) + geom_line(aes(linetype = water_treatment), size= 1)+
+  scale_linetype_manual(values=c("dotted", "dashed", "solid")) +
+  theme(legend.title = element_text( size=10), legend.text=element_text(size=10))+
+  scale_color_manual("Species", values = c("orange", "palevioletred", "mediumblue", 
+                                           "purple1", "gold1","coral", "forestgreen", "red", "skyblue2",
+                                           "slategrey", "sienna"), 
+                     breaks=c("total", "RUMA", "POLA","BICE", "EPCI",
+                              "PUNU", "DISP", "SCAC", "ELPA", "BOMA"), 
+                     labels=c("Total", "Golden dock", "Pale smartweed", "Nodding beggartick",
+                              "Fringed willowherb", "Nuttall's alkaligrass", "Saltgrass",
+                              "Hardstem bulrush", "Common spikerush", "Alkali bulrush"
+                              ))+
+  ggtitle("9 Species Mix Percent Cover") +
+  facet_wrap(~ water_treatment) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab ("Experiment day")+
+  ylab("Percent cover estimate")
+
+
+species_cov 
+
+
+rlang::last_error()
+
+percent_cover
+
+
+

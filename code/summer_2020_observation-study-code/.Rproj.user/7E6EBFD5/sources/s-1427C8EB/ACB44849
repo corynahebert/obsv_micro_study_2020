@@ -1,0 +1,32 @@
+{
+    "id": "ACB44849",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1617676193493.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "expression": "micro_measurements",
+        "caption": "micro_measurements",
+        "totalObservations": 12,
+        "displayedObservations": 12,
+        "variables": 9,
+        "cacheKey": "990A2E88",
+        "object": "micro_measurements",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=micro_measurements&cache_key=990A2E88&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1617669240,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1617676193493,
+    "read_only": false,
+    "read_only_alternatives": []
+}

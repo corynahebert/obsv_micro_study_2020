@@ -1,0 +1,32 @@
+{
+    "id": "F8460708",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1617729577873.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "expression": "plotdatamatrix",
+        "caption": "plotdatamatrix",
+        "totalObservations": 14,
+        "displayedObservations": 14,
+        "variables": 47,
+        "cacheKey": "66F2A3D0",
+        "object": "plotdatamatrix",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=plotdatamatrix&cache_key=66F2A3D0&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1742113878688,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1617729577873,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,17 @@
+"0","library(installr)
+"
+"2","Loading required package: stringr
+"
+"2","
+Welcome to installr version 0.22.0
+
+More information is available on the installr project website:
+https://github.com/talgalili/installr/
+
+Contact: <tal.galili@gmail.com>
+Suggestions and bug-reports can be submitted at: https://github.com/talgalili/installr/issues
+
+			To suppress this message use:
+			suppressPackageStartupMessages(library(installr))
+
+"
